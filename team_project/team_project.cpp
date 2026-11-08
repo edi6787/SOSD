@@ -5,28 +5,11 @@
 #include<algorithm>
 #include<chrono>
 
+#include"index.h"
+#include"search.h"
+#include"benchmark.h"
+
 using namespace std;
-
-struct Sample {
-    uint32_t key;
-    uint32_t position;
-};
-
-//샘플 인덱스 생성
-void build_index(ifstream& file, vector<Sample>& index, uint64_t count);
-
-//키값이 존재하는 구간을 찾는 함수
-//index : 샘플인덱스, key : 검색할 값, start : 검색구간의 시작위치, end : 검색구간의 끝 위치
-bool find_range(const vector<Sample>& index, uint32_t key, uint64_t& count, uint64_t& start, uint64_t& end);
-
-//범위 내에서 키값을 찾는 함수
-bool search_range(ifstream& file, uint32_t key, uint64_t start, uint64_t end, uint64_t& found_position);
-
-//시간 측정 함수
-double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count);
-double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count);
-double measure_miss_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count);
-
 
 int main(){
 
@@ -116,7 +99,6 @@ int main(){
         cout << "검색구간 찾기 실패\n";
     }
 
-
     double build_time = measure_build_time(file, dense_index, count);
 
     double hit_time = measure_hit_time(file, dense_index, dense_index[100].key, count);
@@ -150,146 +132,4 @@ int main(){
     result.close();
    
     return 0;
-}
-
-
-void build_index(ifstream& file, vector<Sample>& index, uint64_t count) {
-
-    if (!file) {
-        cerr << "파일 읽기 실패\n";
-        return;
-    }
-
-    index.clear();
-
-    for (uint64_t i = 0; i < count; i += 1000) {
-
-        file.seekg(8 + static_cast<uint64_t>(i) * 4, ios::beg);
-
-        uint32_t value;
-
-        file.read(
-            reinterpret_cast<char*>(&value),
-            sizeof(value)
-        );
-
-        index.push_back({ value, static_cast<uint32_t>(i) });
-    }
-}
-
-bool compare(uint32_t value, const Sample& sample) {
-    return value < sample.key;
-}
-
-bool find_range(const vector<Sample>& index, uint32_t key, uint64_t& count, uint64_t& start, uint64_t& end) {
-
-    if (index.empty()) {
-        return false;
-    }
-
-    auto it = upper_bound(index.begin(), index.end(), key, compare);
-
-    if (it == index.begin()) {
-        return false;
-    }
-
-    --it;
-    start = it->position;
-
-    ++it;
-
-    if (it == index.end()) {
-        end = count;
-    }
-    else {
-        end = it->position;
-    }
-
-    return true;
-}
-
-bool search_range(ifstream& file, uint32_t key, uint64_t start, uint64_t end, uint64_t& found_position) {
-
-    uint64_t length = end - start;
-
-    vector<uint32_t> data(length);
-
-    file.clear();
-    file.seekg(8 + start * sizeof(uint32_t), ios::beg);
-
-    file.read(reinterpret_cast<char*>(data.data()), length * sizeof(uint32_t));
-
-    if (!file) {
-        return false;
-    }
-
-    auto it = find(data.begin(), data.end(), key);
-
-    if (it == data.end()) {
-        return false;
-    }
-
-    found_position = start + (it - data.begin());
-
-    return true;
-}
-
-
-double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count) {
-
-    auto start = chrono::steady_clock::now();
-
-    build_index(file, index, count);
-
-    auto end = chrono::steady_clock::now();
-
-    chrono::duration<double, milli> elapsed = end - start;
-
-    return elapsed.count();
-}
-
-double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count) {
-
-    uint64_t start, end, found_position;
-
-    auto begin = chrono::steady_clock::now();
-
-    bool found = false;
-
-    if (find_range(index, key, count, start, end)) {
-        found = search_range(file, key, start, end, found_position);
-    }
-
-    auto finish = chrono::steady_clock::now();
-
-    if (!found) {
-        return -1.0;
-    }
-
-    chrono::duration<double, micro> elapsed = finish - begin;
-
-    return elapsed.count();
-}
-
-double measure_miss_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count) {
-
-    uint64_t start, end, found_position;
-
-    auto begin = chrono::steady_clock::now();
-
-    bool found = false;
-
-    if (find_range(index, key, count, start, end)) {
-        found = search_range(file, key, start, end, found_position);
-    }
-
-    auto finish = chrono::steady_clock::now();
-
-    if (found) {
-        return -1.0;
-    }
-
-    chrono::duration<double, micro> elapsed = finish - begin;
-
-    return elapsed.count();
 }

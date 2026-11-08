@@ -139,7 +139,15 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="benchmark.cpp" />
+    <ClCompile Include="index.cpp" />
+    <ClCompile Include="search.cpp" />
     <ClCompile Include="team_project.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="benchmark.h" />
+    <ClInclude Include="index.h" />
+    <ClInclude Include="search.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
