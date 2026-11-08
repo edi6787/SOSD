@@ -11,6 +11,8 @@
 
 using namespace std;
 
+void print_result(double build_time, double hit_time, double miss_time);
+
 int main(){
 
     vector<Sample> dense_index;
@@ -50,6 +52,7 @@ int main(){
     cout << "dense 샘플 인덱스 개수: " << dense_index.size() << '\n';
     cout << "sparse 샘플 인덱스 개수: " << sparse_index.size() << '\n';
 
+    /*
     // 일부 샘플 확인
     for (size_t i = 0; i < 5 && i < dense_index.size(); i++) {
         cout << "key: " << dense_index[i].key
@@ -58,7 +61,7 @@ int main(){
     for (size_t i = 0; i < 5 && i < sparse_index.size(); i++) {
         cout << "key: " << sparse_index[i].key
             << ", position: " << sparse_index[i].position << '\n';
-    }
+    }*/
 
     uint64_t start, start_s;
     uint64_t end, end_s;
@@ -81,7 +84,7 @@ int main(){
     else {
         cout << "검색구간 찾기 실패\n";
     }
-
+    cout << "\n";
     //sparse
     if (find_range(sparse_index, key_s, count_s, start_s, end_s)) {
         if (search_range(file_s, key_s, start_s, end_s, found_position_s)) {
@@ -99,12 +102,44 @@ int main(){
         cout << "검색구간 찾기 실패\n";
     }
 
+    //dense
     double build_time = measure_build_time(file, dense_index, count);
-
     double hit_time = measure_hit_time(file, dense_index, dense_index[100].key, count);
-
     double miss_time = measure_miss_time(file, dense_index, 1000000000, count);
 
+    //sparse
+    double build_time_s = measure_build_time(file_s, sparse_index, count_s);
+    double hit_time_s = measure_hit_time(file_s, sparse_index, sparse_index[100].key, count_s);
+    double miss_time_s = measure_miss_time(file_s, sparse_index, 1000000000, count_s);
+
+    cout << "\n" << "[dense]" << "\n";
+    print_result(build_time, hit_time, miss_time);
+    cout << '\n' << "[sparse]" << "\n";
+    print_result(build_time_s, hit_time_s, miss_time_s);
+
+    ofstream result("result.txt", ios::app);
+
+    if (!result) {
+        cout << "결과 파일을 열 수 없습니다.\n";
+        return 1;
+    }
+    result << "[dense]" << "\n";
+    result << "Build Time: " << build_time << " ms\n";
+    result << "Hit Time: " << hit_time << " us\n";
+    result << "Miss Time: " << miss_time << " us\n";
+
+    result << "[sparse]" << "\n";
+    result << "Build Time: " << build_time_s << " ms\n";
+    result << "Hit Time: " << hit_time_s << " us\n";
+    result << "Miss Time: " << miss_time_s << " us\n";
+
+    file.close();
+    result.close();
+   
+    return 0;
+}
+
+void print_result(double build_time, double hit_time, double miss_time) {
     cout << "Build Time: "
         << build_time
         << " ms\n";
@@ -116,20 +151,4 @@ int main(){
     cout << "Miss Time: "
         << miss_time
         << " us\n";
-
-    ofstream result("result.txt", ios::app);
-
-    if (!result) {
-        cout << "결과 파일을 열 수 없습니다.\n";
-        return 1;
-    }
-
-    result << "Build Time: " << build_time << " ms\n";
-    result << "Hit Time: " << hit_time << " us\n";
-    result << "Miss Time: " << miss_time << " us\n";
-
-    file.close();
-    result.close();
-   
-    return 0;
 }

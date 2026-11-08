@@ -1,18 +1,9 @@
-Build Time: 888.37 ms
-Hit Time: 50 us
-Miss Time: 10.7 us
-Build Time: 889.195 ms
-Hit Time: 55.9 us
-Miss Time: 10.9 us
-Build Time: 895.924 ms
-Hit Time: 62.5 us
-Miss Time: 13.4 us
-Build Time: 916.839 ms
-Hit Time: 71.2 us
-Miss Time: 14 us
-Build Time: 938.128 ms
-Hit Time: 64 us
-Miss Time: 13.7 us
-Build Time: 752.938 ms
-Hit Time: 29.6 us
-Miss Time: 10.2 us
+
+[dense]
+Build Time: 849.394 ms
+Hit Time: 47.8 us
+Miss Time: 10.6 us
+[sparse]
+Build Time: 708.641 ms
+Hit Time: 32.8 us
+Miss Time: 12.1 us
