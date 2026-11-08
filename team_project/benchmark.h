@@ -15,7 +15,7 @@ double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t ke
 double measure_miss_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count);
 
 //빌드타임 측정
-double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count);
+double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t sampel_value);
 
 
 

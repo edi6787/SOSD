@@ -12,7 +12,7 @@ struct Sample {
 };
 
 //샘플 인덱스 배열 생성
-void build_index(ifstream& file, vector<Sample>& index, uint64_t count);
+void build_index(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t sample_value);
 
 //sample의 key값이 value보다 크면 true 리턴
 bool compare(uint32_t value, const Sample& sample);

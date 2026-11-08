@@ -5,7 +5,9 @@
 
 #include "index.h"
 
-void build_index(ifstream& file, vector<Sample>& index, uint64_t count) {
+const uint64_t sample_value = 1000;
+
+void build_index(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t sample_value) {
 
     if (!file) {
         cerr << "파일 읽기 실패\n";
@@ -14,7 +16,7 @@ void build_index(ifstream& file, vector<Sample>& index, uint64_t count) {
 
     index.clear();
 
-    for (uint64_t i = 0; i < count; i += 1000) {
+    for (uint64_t i = 0; i < count; i += sample_value) {
 
         file.seekg(8 + static_cast<uint64_t>(i) * 4, ios::beg);
 

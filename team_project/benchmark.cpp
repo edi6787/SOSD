@@ -6,11 +6,11 @@
 
 #include"benchmark.h"
 
-double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count) {
+double measure_build_time(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t sample_value) {
 
     auto start = chrono::steady_clock::now();
 
-    build_index(file, index, count);
+    build_index(file, index, count, sample_value);
 
     auto end = chrono::steady_clock::now();
 

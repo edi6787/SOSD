@@ -18,7 +18,6 @@ int main(){
     vector<Sample> dense_index;
     vector<Sample> sparse_index;
 
-    //파일 열기
     ifstream file(
         R"(C:\Users\kimwo\SOSD\data\uniform_dense_200M_uint32)",
         ios::binary
@@ -46,8 +45,11 @@ int main(){
     cout << "dense 데이터 개수: " << count << '\n';
     cout << "sparse 데이터 개수: " << count << '\n';
 
-    build_index(file, dense_index, count);
-    build_index(file_s, sparse_index, count_s);
+    const uint64_t sample_value = 1000;
+    const uint64_t sample_value_s = 1000;
+
+    build_index(file, dense_index, count, sample_value);
+    build_index(file_s, sparse_index, count_s, sample_value_s);
 
     cout << "dense 샘플 인덱스 개수: " << dense_index.size() << '\n';
     cout << "sparse 샘플 인덱스 개수: " << sparse_index.size() << '\n';
@@ -103,12 +105,12 @@ int main(){
     }
 
     //dense
-    double build_time = measure_build_time(file, dense_index, count);
+    double build_time = measure_build_time(file, dense_index, count, sample_value);
     double hit_time = measure_hit_time(file, dense_index, dense_index[100].key, count);
     double miss_time = measure_miss_time(file, dense_index, 1000000000, count);
 
     //sparse
-    double build_time_s = measure_build_time(file_s, sparse_index, count_s);
+    double build_time_s = measure_build_time(file_s, sparse_index, count_s, sample_value_s);
     double hit_time_s = measure_hit_time(file_s, sparse_index, sparse_index[100].key, count_s);
     double miss_time_s = measure_miss_time(file_s, sparse_index, 1000000000, count_s);
 
@@ -123,7 +125,7 @@ int main(){
         cout << "결과 파일을 열 수 없습니다.\n";
         return 1;
     }
-    result << "[dense]" << "\n";
+    result << "\n" << "[dense]" << "\n";
     result << "Build Time: " << build_time << " ms\n";
     result << "Hit Time: " << hit_time << " us\n";
     result << "Miss Time: " << miss_time << " us\n";
