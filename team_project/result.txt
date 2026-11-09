@@ -25,3 +25,75 @@ Miss Time: 11.7 us
 Build Time: 716.091 ms
 Hit Time: 32 us
 Miss Time: 11.7 us
+
+[dense]
+Build Time: 876.428 ms
+Hit Time: 62.5 us
+Miss Time: 15.2 us
+[sparse]
+Build Time: 878.924 ms
+Hit Time: 43.9 us
+Miss Time: 15.7 us
+
+[dense]
+Build Time: 873.347 ms
+Hit Time: 47.8 us
+Miss Time: 11.5 us
+[sparse]
+Build Time: 733.371 ms
+Hit Time: 33.2 us
+Miss Time: 13 us
+
+[dense]
+Build Time: 999.989 ms
+Hit Time: 70.2 us
+Miss Time: 14.4 us
+[sparse]
+Build Time: 807.087 ms
+Hit Time: 30.9 us
+Miss Time: 12.4 us
+
+[dense]
+Build Time: 712.421 ms
+Hit Time: 31.4 us
+Miss Time: 10.3 us
+[sparse]
+Build Time: 1293.25 ms
+Hit Time: 49.8 us
+Miss Time: 28.2 us
+
+[dense]
+Build Time: 747.046 ms
+Hit Time: 47.3 us
+Miss Time: 10 us
+[sparse]
+Build Time: 76.043 ms
+Hit Time: 75.4 us
+Miss Time: 39.2 us
+
+[dense]
+Build Time: 743.309 ms
+Hit Time: 47.5 us
+Miss Time: 11 us
+[sparse]
+Build Time: 9.9986 ms
+Hit Time: 409.4 us
+Miss Time: 324.6 us
+
+[dense] / sample_value : 10000
+Build Time: 88.374 ms
+Hit Time: 89.7 us
+Miss Time: 42.9 us
+[sparse] / sample_Value : 1000
+Build Time: 839.782 ms
+Hit Time: 33.9 us
+Miss Time: 13.3 us
+
+[dense] / sample_value : 10000
+Build Time: 107.384 ms
+Hit Time: 120.9 us
+Miss Time: 75.5 us
+[sparse] / sample_Value : 10000
+Build Time: 100.44 ms
+Hit Time: 123.5 us
+Miss Time: 83 us

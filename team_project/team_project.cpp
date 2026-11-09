@@ -4,6 +4,7 @@
 #include<vector>
 #include<algorithm>
 #include<chrono>
+#include <Windows.h>
 
 #include"index.h"
 #include"search.h"
@@ -13,7 +14,15 @@ using namespace std;
 
 void print_result(double build_time, double hit_time, double miss_time);
 
+bool set_memory_limit(size_t memory_limit);
+
 int main(){
+
+    // 512MB 제한
+    if (!set_memory_limit(512ULL * 1024 * 1024)) {
+        cout << "메모리 제한 설정 실패\n";
+        return 1;
+    }
 
     vector<Sample> dense_index;
     vector<Sample> sparse_index;
@@ -53,17 +62,6 @@ int main(){
 
     cout << "dense 샘플 인덱스 개수: " << dense_index.size() << '\n';
     cout << "sparse 샘플 인덱스 개수: " << sparse_index.size() << '\n';
-
-    /*
-    // 일부 샘플 확인
-    for (size_t i = 0; i < 5 && i < dense_index.size(); i++) {
-        cout << "key: " << dense_index[i].key
-            << ", position: " << dense_index[i].position << '\n';
-    }
-    for (size_t i = 0; i < 5 && i < sparse_index.size(); i++) {
-        cout << "key: " << sparse_index[i].key
-            << ", position: " << sparse_index[i].position << '\n';
-    }*/
 
     uint64_t start, start_s;
     uint64_t end, end_s;
@@ -125,12 +123,13 @@ int main(){
         cout << "결과 파일을 열 수 없습니다.\n";
         return 1;
     }
-    result << "\n" << "[dense]" << "\n";
+
+    result << "\n" << "[dense] / sample_value : " << sample_value << "\n";
     result << "Build Time: " << build_time << " ms\n";
     result << "Hit Time: " << hit_time << " us\n";
     result << "Miss Time: " << miss_time << " us\n";
 
-    result << "[sparse]" << "\n";
+    result << "[sparse] / sample_Value : " << sample_value_s << "\n";
     result << "Build Time: " << build_time_s << " ms\n";
     result << "Hit Time: " << hit_time_s << " us\n";
     result << "Miss Time: " << miss_time_s << " us\n";
@@ -153,4 +152,37 @@ void print_result(double build_time, double hit_time, double miss_time) {
     cout << "Miss Time: "
         << miss_time
         << " us\n";
+}
+
+HANDLE hJob = NULL;
+
+bool set_memory_limit(size_t memory_limit) {
+
+    hJob = CreateJobObject(NULL, NULL);
+
+    if (hJob == NULL)
+        return false;
+
+    JOBOBJECT_EXTENDED_LIMIT_INFORMATION info = {};
+
+    info.BasicLimitInformation.LimitFlags =
+        JOB_OBJECT_LIMIT_PROCESS_MEMORY;
+
+    info.ProcessMemoryLimit = memory_limit;
+
+    if (!SetInformationJobObject(
+        hJob,
+        JobObjectExtendedLimitInformation,
+        &info,
+        sizeof(info))) {
+        return false;
+    }
+
+    if (!AssignProcessToJobObject(
+        hJob,
+        GetCurrentProcess())) {
+        return false;
+    }
+
+    return true;
 }

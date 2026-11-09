@@ -22,10 +22,7 @@ void build_index(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t
 
         uint32_t value;
 
-        file.read(
-            reinterpret_cast<char*>(&value),
-            sizeof(value)
-        );
+        file.read(reinterpret_cast<char*>(&value), sizeof(value));
 
         index.push_back({ value, static_cast<uint32_t>(i) });
     }
