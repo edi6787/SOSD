@@ -28,12 +28,12 @@ int main(){
     vector<Sample> sparse_index;
 
     ifstream file(
-        R"(C:\Users\kimwo\SOSD\data\uniform_dense_200M_uint32)",
+        "data/uniform_dense_200M_uint32",
         ios::binary
     );
 
     ifstream file_s(
-        R"(C:\Users\kimwo\SOSD\data\uniform_sparse_200M_uint32)",
+        "data/uniform_sparse_200M_uint32",
         ios::binary
     );
 
@@ -54,7 +54,7 @@ int main(){
     cout << "dense 데이터 개수: " << count << '\n';
     cout << "sparse 데이터 개수: " << count << '\n';
 
-    const uint64_t sample_value = 1000;
+    const uint64_t sample_value = 1000000;
     const uint64_t sample_value_s = 1000;
 
     build_index(file, dense_index, count, sample_value);
@@ -65,7 +65,7 @@ int main(){
 
     uint64_t start, start_s;
     uint64_t end, end_s;
-    uint32_t key = dense_index[100].key;
+    uint32_t key = 10034;
     uint64_t found_position, found_position_s;
     uint32_t key_s = sparse_index[100].key;
 
@@ -84,6 +84,7 @@ int main(){
     else {
         cout << "검색구간 찾기 실패\n";
     }
+
     cout << "\n";
     //sparse
     if (find_range(sparse_index, key_s, count_s, start_s, end_s)) {
@@ -124,12 +125,12 @@ int main(){
         return 1;
     }
 
-    result << "\n" << "[dense] / sample_value : " << sample_value << "\n";
+    result << "\n" << "[dense] / sample_value : " << sample_value << ", " << "key : " << key << '\n';
     result << "Build Time: " << build_time << " ms\n";
     result << "Hit Time: " << hit_time << " us\n";
     result << "Miss Time: " << miss_time << " us\n";
 
-    result << "[sparse] / sample_Value : " << sample_value_s << "\n";
+    result << "[sparse] / sample_value : " << sample_value_s <<", " << "key : " << key_s << '\n';
     result << "Build Time: " << build_time_s << " ms\n";
     result << "Hit Time: " << hit_time_s << " us\n";
     result << "Miss Time: " << miss_time_s << " us\n";
