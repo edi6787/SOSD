@@ -9,7 +9,7 @@
 #include"search.h"
 
 //key값이 있는 경우
-double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count);
+double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count, uint64_t& found_position);
 
 //key값이 없는 경우
 double measure_miss_time(ifstream& file, const vector<Sample>& index, uint32_t key, uint64_t count);
