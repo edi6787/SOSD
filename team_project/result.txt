@@ -1,180 +1,170 @@
 
-[dense]
-Build Time: 902.664 ms
-Hit Time: 76.9 us
-Miss Time: 13 us
-[sparse]
-Build Time: 895.529 ms
-Hit Time: 33 us
-Miss Time: 11.9 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.1407 ms
+Hit Time: 4.1042 ms
+Miss Time: 4.4965 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 0.8562 ms
+Hit Time: 3.8485 ms
+Miss Time: 5.1196 ms
 
-[dense]
-Build Time: 711.465 ms
-Hit Time: 48.4 us
-Miss Time: 10.6 us
-[sparse]
-Build Time: 700.174 ms
-Hit Time: 28.8 us
-Miss Time: 11.1 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.302 ms
+Hit Time: 6.0613 ms
+Miss Time: 6.7418 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 1.8598 ms
+Hit Time: 6.3371 ms
+Miss Time: 8.1129 ms
 
-[dense]
-Build Time: 723.328 ms
-Hit Time: 47 us
-Miss Time: 11.7 us
-[sparse]
-Build Time: 716.091 ms
-Hit Time: 32 us
-Miss Time: 11.7 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.0278 ms
+Hit Time: 5.6667 ms
+Miss Time: 9.5999 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 1.2032 ms
+Hit Time: 4.0413 ms
+Miss Time: 5.3723 ms
 
-[dense]
-Build Time: 876.428 ms
-Hit Time: 62.5 us
-Miss Time: 15.2 us
-[sparse]
-Build Time: 878.924 ms
-Hit Time: 43.9 us
-Miss Time: 15.7 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.4622 ms
+Hit Time: 5.6673 ms
+Miss Time: 9.3281 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 1.3378 ms
+Hit Time: 5.0439 ms
+Miss Time: 4.8909 ms
 
-[dense]
-Build Time: 873.347 ms
-Hit Time: 47.8 us
-Miss Time: 11.5 us
-[sparse]
-Build Time: 733.371 ms
-Hit Time: 33.2 us
-Miss Time: 13 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.1988 ms
+Hit Time: 4.688 ms
+Miss Time: 5.8782 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 1.017 ms
+Hit Time: 4.4964 ms
+Miss Time: 5.05 ms
 
-[dense]
-Build Time: 999.989 ms
-Hit Time: 70.2 us
-Miss Time: 14.4 us
-[sparse]
-Build Time: 807.087 ms
-Hit Time: 30.9 us
-Miss Time: 12.4 us
+[dense] / sample_value : 1000000, key : 100000042
+Build Time: 1.3076 ms
+Hit Time: 6.4157 ms
+Miss Time: 9.477 ms
+[sparse] / sample_value : 1000000, key : 2147509746
+Build Time: 1.3662 ms
+Hit Time: 6.287 ms
+Miss Time: 7.706 ms
 
-[dense]
-Build Time: 712.421 ms
-Hit Time: 31.4 us
-Miss Time: 10.3 us
-[sparse]
-Build Time: 1293.25 ms
-Hit Time: 49.8 us
-Miss Time: 28.2 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.5102 ms
+Hit Time: 6.4096 ms
+Miss Time: 7.4394 ms
+[sparse] / sample_value : 1000000, key : 10024
+Build Time: 1.7456 ms
+Hit Time: -1 ms
+Miss Time: 7.4526 ms
 
-[dense]
-Build Time: 747.046 ms
-Hit Time: 47.3 us
-Miss Time: 10 us
-[sparse]
-Build Time: 76.043 ms
-Hit Time: 75.4 us
-Miss Time: 39.2 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.681 ms
+Hit Time: 6.3102 ms
+Miss Time: 6.1893 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.3563 ms
+Hit Time: 5.5922 ms
+Miss Time: 6.5353 ms
 
-[dense]
-Build Time: 743.309 ms
-Hit Time: 47.5 us
-Miss Time: 11 us
-[sparse]
-Build Time: 9.9986 ms
-Hit Time: 409.4 us
-Miss Time: 324.6 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.363 ms
+Hit Time: 5.5336 ms
+Miss Time: 7.4911 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.616 ms
+Hit Time: 4.9966 ms
+Miss Time: 5.5595 ms
 
-[dense] / sample_value : 10000
-Build Time: 88.374 ms
-Hit Time: 89.7 us
-Miss Time: 42.9 us
-[sparse] / sample_Value : 1000
-Build Time: 839.782 ms
-Hit Time: 33.9 us
-Miss Time: 13.3 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 5.2603 ms
+Hit Time: 9.1438 ms
+Miss Time: 8.3718 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.5646 ms
+Hit Time: 7.2009 ms
+Miss Time: 10.1033 ms
 
-[dense] / sample_value : 10000
-Build Time: 107.384 ms
-Hit Time: 120.9 us
-Miss Time: 75.5 us
-[sparse] / sample_Value : 10000
-Build Time: 100.44 ms
-Hit Time: 123.5 us
-Miss Time: 83 us
 
-[dense] / sample_value : 100000
-Build Time: 13.072 ms
-Hit Time: 407.2 us
-Miss Time: 402.6 us
-[sparse] / sample_Value : 1000
-Build Time: 920.03 ms
-Hit Time: 67.1 us
-Miss Time: 15.7 us
+=search_range_unit
 
-[dense] / sample_value : 1000
-Build Time: 894.172 ms
-Hit Time: 65.5 us
-Miss Time: 13.5 us
-[sparse] / sample_Value : 1000
-Build Time: 732.212 ms
-Hit Time: 34.5 us
-Miss Time: 12.6 us
 
-[dense] / sample_value : 10000
-Build Time: 81.3232 ms
-Hit Time: 54.9 us
-Miss Time: 37 us
-[sparse] / sample_Value : 1000
-Build Time: 728.559 ms
-Hit Time: 47.6 us
-Miss Time: 12 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 3.9594 ms
+Hit Time: 0.14 ms
+Miss Time: 5.4512 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.796 ms
+Hit Time: 0.5105 ms
+Miss Time: 5.2776 ms
 
-[dense] / sample_value : 100000
-Build Time: 10.7775 ms
-Hit Time: 304 us
-Miss Time: 325 us
-[sparse] / sample_Value : 1000
-Build Time: 742.342 ms
-Hit Time: 41.5 us
-Miss Time: 12 us
 
-[dense] / sample_value : 1000000
-Build Time: 0.9146 ms
-Hit Time: 4114.1 us
-Miss Time: 4812.2 us
-[sparse] / sample_Value : 1000
-Build Time: 734.961 ms
-Hit Time: 48.8 us
-Miss Time: 12.3 us
+=이진
 
-[dense] / sample_value : 1000000key : 10034
-Build Time: 1.1668 ms
-Hit Time: 5120 us
-Miss Time: 6470.2 us
-[sparse] / sample_Value : 1000key : 2147739
-Build Time: 914.592 ms
-Hit Time: 69.3 us
-Miss Time: 16.4 us
 
-[dense] / sample_value : 100000011296key : 10034
-Build Time: 2.5109 ms
-Hit Time: 6018.6 us
-Miss Time: 6341.1 us
-[sparse] / sample_Value : 100011296key : 2147739
-Build Time: 929.193 ms
-Hit Time: 67.6 us
-Miss Time: 15.4 us
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.7999 ms
+Hit Time: 0.0768 ms
+Miss Time: 0.0764 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.3362 ms
+Hit Time: 0.0766 ms
+Miss Time: 0.066 ms
 
-[dense] / sample_value : 1000000, key : 10034
-Build Time: 2.0131 ms
-Hit Time: 5165.5 us
-Miss Time: 5909.8 us
-[sparse] / sample_Value : 1000, key : 2147739
-Build Time: 913.048 ms
-Hit Time: 73.5 us
-Miss Time: 17.4 us
+[dense] / sample_value : 100000, key : 10024
+Build Time: 177.72 ms
+Hit Time: 0.0602 ms
+Miss Time: 0.0541 ms
+[sparse] / sample_value : 100000, key : 216911801
+Build Time: 172.717 ms
+Hit Time: 0.0976 ms
+Miss Time: 0.0736 ms
 
-[dense] / sample_value : 1000000, key : 10034
-Build Time: 0.8514 ms
-Hit Time: 7451.9 us
-Miss Time: 8882.9 us
-[sparse] / sample_value : 1000, key : 2147739
-Build Time: 670.832 ms
-Hit Time: 35.2 us
-Miss Time: 11.2 us
+[dense] / sample_value : 10000000, key : 10024
+Build Time: 0.2113 ms
+Hit Time: 0.419 ms
+Miss Time: 0.444 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.6163 ms
+Hit Time: 0.0838 ms
+Miss Time: 0.0712 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.6947 ms
+Hit Time: 0.0742 ms
+Miss Time: 0.0747 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.4596 ms
+Hit Time: 0.0882 ms
+Miss Time: 0.068 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 2.0848 ms
+Hit Time: 0.0913 msfound : 9982
+Miss Time: 0.0829 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.5147 ms
+Hit Time: 0.096 msfound : 10099999
+Miss Time: 0.1492 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.4521 ms
+Hit Time: 0.0651 ms found : 9982
+Miss Time: 0.07 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.3089 ms
+Hit Time: 0.0694 ms found : 10099999
+Miss Time: 0.0632 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 2.3121 ms
+Hit Time: 0.3672 ms, found : 9982
+Miss Time: 0.2211 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.8339 ms
+Hit Time: 0.1047 ms, found : 10099999
+Miss Time: 0.1075 ms
