@@ -54,63 +54,27 @@ int main(){
     cout << "dense 데이터 개수: " << count << '\n';
     cout << "sparse 데이터 개수: " << count << '\n';
 
+    //샘플인덱스 간격조절
     const uint64_t sample_value = 1000000;
-    const uint64_t sample_value_s = 1000;
+    const uint64_t sample_value_s = 1000000;
 
-    build_index(file, dense_index, count, sample_value);
-    build_index(file_s, sparse_index, count_s, sample_value_s);
-
-    cout << "dense 샘플 인덱스 개수: " << dense_index.size() << '\n';
-    cout << "sparse 샘플 인덱스 개수: " << sparse_index.size() << '\n';
-
+    //범위 설정 시 시작과 끝 부분을 받아오는 매개변수
     uint64_t start, start_s;
     uint64_t end, end_s;
-    uint32_t key = 10034;
+
+    //key값 설정
+    uint32_t key = 10024;
+    uint32_t key_s = 216911801;
     uint64_t found_position, found_position_s;
-    uint32_t key_s = sparse_index[100].key;
-
-    if (find_range(dense_index, key, count, start, end)) {
-        if (search_range(file, key, start, end, found_position)) {
-            cout << "[dense]검색 성공\n";
-            cout << "start: " << start << '\n';
-            cout << "end: " << end << '\n';
-            cout << "key: " << key << '\n';
-            cout << "found_position: " << found_position << '\n';
-        }
-        else {
-            cout << "구간 내에서 키를 찾지 못했습니다.\n";
-        }
-    }
-    else {
-        cout << "검색구간 찾기 실패\n";
-    }
-
-    cout << "\n";
-    //sparse
-    if (find_range(sparse_index, key_s, count_s, start_s, end_s)) {
-        if (search_range(file_s, key_s, start_s, end_s, found_position_s)) {
-            cout << "[sparse]검색 성공\n";
-            cout << "start: " << start_s << '\n';
-            cout << "end: " << end_s << '\n';
-            cout << "key: " << key_s << '\n';
-            cout << "found_position: " << found_position_s << '\n';
-        }
-        else {
-            cout << "구간 내에서 키를 찾지 못했습니다.\n";
-        }
-    }
-    else {
-        cout << "검색구간 찾기 실패\n";
-    }
-
-    //dense
+ 
+    //dense : build, hit, miss 시간측정
     double build_time = measure_build_time(file, dense_index, count, sample_value);
-    double hit_time = measure_hit_time(file, dense_index, dense_index[100].key, count);
+    double hit_time = measure_hit_time(file, dense_index, key, count, found_position);
     double miss_time = measure_miss_time(file, dense_index, 1000000000, count);
 
-    //sparse
+    //sparse : build, hit, miss 시간측정
     double build_time_s = measure_build_time(file_s, sparse_index, count_s, sample_value_s);
-    double hit_time_s = measure_hit_time(file_s, sparse_index, sparse_index[100].key, count_s);
+    double hit_time_s = measure_hit_time(file_s, sparse_index, key_s, count_s, found_position_s);
     double miss_time_s = measure_miss_time(file_s, sparse_index, 1000000000, count_s);
 
     cout << "\n" << "[dense]" << "\n";
@@ -118,6 +82,7 @@ int main(){
     cout << '\n' << "[sparse]" << "\n";
     print_result(build_time_s, hit_time_s, miss_time_s);
 
+    //result로 출력
     ofstream result("result.txt", ios::app);
 
     if (!result) {
@@ -127,13 +92,14 @@ int main(){
 
     result << "\n" << "[dense] / sample_value : " << sample_value << ", " << "key : " << key << '\n';
     result << "Build Time: " << build_time << " ms\n";
-    result << "Hit Time: " << hit_time << " us\n";
-    result << "Miss Time: " << miss_time << " us\n";
+    result << "Hit Time: " << hit_time << " ms" << ", " << "found : " << found_position << '\n';
+    result << "Miss Time: " << miss_time << " ms\n";
 
     result << "[sparse] / sample_value : " << sample_value_s <<", " << "key : " << key_s << '\n';
     result << "Build Time: " << build_time_s << " ms\n";
-    result << "Hit Time: " << hit_time_s << " us\n";
-    result << "Miss Time: " << miss_time_s << " us\n";
+    result << "Hit Time: " << hit_time_s << " ms" << ", " << "found : " << found_position_s << '\n';
+    result << "Miss Time: " << miss_time_s << " ms\n";
+
 
     file.close();
     result.close();
@@ -148,11 +114,11 @@ void print_result(double build_time, double hit_time, double miss_time) {
 
     cout << "Hit Time: "
         << hit_time
-        << " us\n";
+        << " ms\n";
 
     cout << "Miss Time: "
         << miss_time
-        << " us\n";
+        << " ms\n";
 }
 
 HANDLE hJob = NULL;
