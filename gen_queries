@@ -1,0 +1,61 @@
+// gen_queries.cpp - 테스트용 쿼리 파일 생성기
+//   있는 키와 없는 키를 섞어서 한 줄에 하나씩 출력한다.
+//
+// 사용법: gen_queries.exe <dataset> <쿼리 개수> <출력 파일> [있는 키 비율 0~1, 기본 0.5] [seed]
+//   예) gen_queries.exe uniform_dense_200M_uint32 10000 q_dense_10k.txt
+#include "common.h"
+#include <random>
+
+int main(int argc, char** argv) {
+    if (argc < 4) {
+        fprintf(stderr, "usage: %s <dataset> <count> <out.txt> [hit_ratio=0.5] [seed=42]\n", argv[0]);
+        return 1;
+    }
+    BinFile f;
+    if (!f.open(argv[1], BinFile::Random)) { fprintf(stderr, "cannot open %s\n", argv[1]); return 1; }
+    uint64_t n = 0;
+    f.pread(&n, 8, 0);
+    if (n < 2) { fprintf(stderr, "dataset too small\n"); return 1; }
+    uint64_t count = strtoull(argv[2], nullptr, 10);
+    double hitRatio = argc > 4 ? atof(argv[4]) : 0.5;
+    std::mt19937_64 rng(argc > 5 ? strtoull(argv[5], nullptr, 10) : 42);
+
+    uint32_t firstKey, lastKey;
+    f.pread(&firstKey, 4, 8);
+    f.pread(&lastKey, 4, 8 + 4 * (n - 1));
+
+    FILE* out = fopen(argv[3], "w");
+    if (!out) { fprintf(stderr, "cannot write %s\n", argv[3]); return 1; }
+
+    std::uniform_int_distribution<uint64_t> pickIdx(0, n - 2);
+    std::uniform_real_distribution<double> coin(0.0, 1.0);
+    uint64_t hits = 0, misses = 0;
+
+    for (uint64_t q = 0; q < count; ++q) {
+        uint32_t pair[2];
+        if (coin(rng) < hitRatio) {                       // 있는 키: 임의 위치의 키
+            f.pread(pair, 4, 8 + 4 * pickIdx(rng));
+            fprintf(out, "%u\n", pair[0]); ++hits;
+            continue;
+        }
+        bool done = false;                                // 없는 키: 이웃한 두 키 사이의 빈칸
+        for (int tries = 0; tries < 50 && !done; ++tries) {
+            f.pread(pair, 8, 8 + 4 * pickIdx(rng));
+            if (pair[1] - pair[0] > 1) {
+                uint32_t gap = pair[1] - pair[0] - 1;
+                fprintf(out, "%u\n", pair[0] + 1 + static_cast<uint32_t>(rng() % gap));
+                done = true;
+            }
+        }
+        if (!done) {                                      // 빈칸이 거의 없으면 범위 밖 값
+            if (firstKey > 0)                fprintf(out, "%u\n", static_cast<uint32_t>(rng() % firstKey));
+            else if (lastKey < 0xFFFFFFFFu)  fprintf(out, "%u\n", lastKey + 1 + static_cast<uint32_t>(rng() % (0xFFFFFFFFu - lastKey)));
+            else                             { --q; continue; }
+        }
+        ++misses;
+    }
+    fclose(out);
+    printf("wrote %llu queries (%llu existing, %llu missing) to %s\n",
+           (unsigned long long)count, (unsigned long long)hits, (unsigned long long)misses, argv[3]);
+    return 0;
+}
