@@ -59,14 +59,14 @@ int main(){
     cout << "sparse 데이터 개수: " << count << '\n';
 
     //샘플인덱스 간격조절
-    const uint64_t sample_value = 1000000;
-    const uint64_t sample_value_s = 1000000;
+    const uint64_t sample_value = 10000000;
+    const uint64_t sample_value_s = 10000000;
 
     //key값 설정
     uint32_t key[5];
     uint32_t key_s[5];
 
-    uint64_t positions[5] = { 10000,1000000,10000000,50000000,100000000 };
+    uint64_t positions[5] = { 40,1000000,10000000,50000000,100000000 };
 
     //키 값 추출
     extract_keys(file, key, positions, 5);
@@ -99,6 +99,7 @@ int main(){
         print_result(build_time, hit_time, miss_time);
         cout << '\n' << "[sparse]" << "\n";
         print_result(build_time_s, hit_time_s, miss_time_s);
+        cout << "==========================\n";
 
         result << "\n" << "[dense] / sample_value : " << sample_value << ", " << "key : " << key [i]<< '\n';
         result << "Build Time: " << build_time << " ms\n";
