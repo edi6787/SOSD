@@ -14,10 +14,11 @@ using namespace std;
 
 void print_result(double build_time, double hit_time, double miss_time);
 
+//메모리 제한
 bool set_memory_limit(size_t memory_limit);
 
+//키 추출 함수
 void extract_keys(ifstream& file, uint32_t keys[], uint64_t positions[], int size);
-
 
 int main(){
 
@@ -80,6 +81,10 @@ int main(){
 
     //result로 출력
     ofstream result("result.txt", ios::app);
+    if (!result) {
+        cout << "결과 파일을 열 수 없습니다.\n";
+        return 1;
+    }
  
     for (int i = 0; i < 5; i++) {
         //dense : hit, miss 시간측정
@@ -94,11 +99,6 @@ int main(){
         print_result(build_time, hit_time, miss_time);
         cout << '\n' << "[sparse]" << "\n";
         print_result(build_time_s, hit_time_s, miss_time_s);
-
-        if (!result) {
-            cout << "결과 파일을 열 수 없습니다.\n";
-            return 1;
-        }
 
         result << "\n" << "[dense] / sample_value : " << sample_value << ", " << "key : " << key [i]<< '\n';
         result << "Build Time: " << build_time << " ms\n";
