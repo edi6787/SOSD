@@ -41,7 +41,9 @@ bool find_range(const vector<Sample>& index, uint32_t key, uint64_t& count, uint
     auto it = upper_bound(index.begin(), index.end(), key, compare);
 
     if (it == index.begin()) {
-        return false;
+        start = 0;
+        end = index.size() > 1 ? index[1].position : count;
+        return true;
     }
 
     --it;
