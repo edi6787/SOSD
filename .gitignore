@@ -1,0 +1,12 @@
+# Visual Studio 빌드 산출물
+.vs/
+x64/
+Debug/
+Release/
+*.obj
+*.pdb
+*.ilk
+*.exe
+
+# 데이터셋 (용량이 커서 저장소에 올리지 않음)
+data/
