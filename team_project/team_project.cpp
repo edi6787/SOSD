@@ -58,10 +58,6 @@ int main(){
     const uint64_t sample_value = 1000000;
     const uint64_t sample_value_s = 1000000;
 
-    //범위 설정 시 시작과 끝 부분을 받아오는 매개변수
-    uint64_t start, start_s;
-    uint64_t end, end_s;
-
     //key값 설정
     uint32_t key = 10024;
     uint32_t key_s = 216911801;

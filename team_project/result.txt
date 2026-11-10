@@ -168,3 +168,39 @@ Miss Time: 0.2211 ms
 Build Time: 1.8339 ms
 Hit Time: 0.1047 ms, found : 10099999
 Miss Time: 0.1075 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 42.8769 ms
+Hit Time: 0.9987 ms, found : 9982
+Miss Time: 0.9508 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 30.7607 ms
+Hit Time: 1.9809 ms, found : 10099999
+Miss Time: 1.6346 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 3.9687 ms
+Hit Time: 0.1268 ms, found : 9982
+Miss Time: 0.1143 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.9108 ms
+Hit Time: 0.2695 ms, found : 10099999
+Miss Time: 0.3387 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 1.0903 ms
+Hit Time: 0.0567 ms, found : 9982
+Miss Time: 0.067 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.0565 ms
+Hit Time: 0.0597 ms, found : 10099999
+Miss Time: 0.0536 ms
+
+[dense] / sample_value : 1000000, key : 10024
+Build Time: 2.2719 ms
+Hit Time: 0.1837 ms, found : 9982
+Miss Time: 0.1514 ms
+[sparse] / sample_value : 1000000, key : 216911801
+Build Time: 1.7769 ms
+Hit Time: 0.0751 ms, found : 10099999
+Miss Time: 0.0665 ms
