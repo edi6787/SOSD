@@ -5,8 +5,6 @@
 
 #include "index.h"
 
-const uint64_t sample_value = 1000;
-
 void build_index(ifstream& file, vector<Sample>& index, uint64_t count, uint64_t sample_value) {
 
     if (!file) {
