@@ -28,7 +28,7 @@ double measure_hit_time(ifstream& file, const vector<Sample>& index, uint32_t ke
     bool found = false;
 
     if (find_range(index, key, count, start, end)) {
-        found = search_range_binary(file, key, start, end, found_position);
+        found = search_range_interpolation(file, key, start, end, found_position);
     }
 
     auto finish = chrono::steady_clock::now();
@@ -51,7 +51,7 @@ double measure_miss_time(ifstream& file, const vector<Sample>& index, uint32_t k
     bool found = false;
 
     if (find_range(index, key, count, start, end)) {
-        found = search_range_binary(file, key, start, end, found_position);
+        found = search_range_interpolation(file, key, start, end, found_position);
     }
 
     auto finish = chrono::steady_clock::now();

@@ -97,3 +97,67 @@ bool search_range_buffer(ifstream& file, uint32_t key, uint64_t start, uint64_t 
 
     return false;
 }
+
+bool search_range_interpolation(ifstream& file, uint32_t key,
+    uint64_t start, uint64_t end, uint64_t& found_position) {
+
+    uint64_t low = start;
+    uint64_t high = end - 1;
+
+    uint32_t low_value, high_value;
+
+    while (low <= high) {
+
+        // 양 끝값 읽기
+        file.clear();
+        file.seekg(8 + low * sizeof(uint32_t), ios::beg);
+        file.read(reinterpret_cast<char*>(&low_value), sizeof(low_value));
+
+        file.clear();
+        file.seekg(8 + high * sizeof(uint32_t), ios::beg);
+        file.read(reinterpret_cast<char*>(&high_value), sizeof(high_value));
+
+        if (!file) return false;
+
+        // 탐색 범위 밖에 있는 경우
+        if (key < low_value || key > high_value) {
+            return false;
+        }
+
+        // 양 끝값이 같은 경우 0으로 나누는 것 방지
+        if (low_value == high_value) {
+            if (low_value == key) {
+                found_position = low;
+                return true;
+            }
+            return false;
+        }
+
+        // 보간탐색 위치 계산
+        uint64_t pos = low +
+            (static_cast<uint64_t>(key - low_value) * (high - low))
+            / (high_value - low_value);
+
+        uint32_t value;
+
+        file.clear();
+        file.seekg(8 + pos * sizeof(uint32_t), ios::beg);
+        file.read(reinterpret_cast<char*>(&value), sizeof(value));
+
+        if (!file) return false;
+
+        if (value == key) {
+            found_position = pos;
+            return true;
+        }
+        else if (value < key) {
+            low = pos + 1;
+        }
+        else {
+            if (pos == 0) return false;
+            high = pos - 1;
+        }
+    }
+
+    return false;
+}
