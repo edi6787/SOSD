@@ -1,0 +1,24 @@
+# ======= SOSD 데이터 파일 (약 800MB, Git에 올리지 않음) =======
+data/
+
+# ======= Visual Studio 빌드 산출물 =======
+.vs/
+x64/
+x86/
+Debug/
+Release/
+build/
+*.user
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.log
+*.tlog
+*.ipch
+*.VC.db
+*.VC.opendb
+
+# ======= 팀 내부 문서 (Git에 올리지 않음) =======
+docs/
+Claude.md

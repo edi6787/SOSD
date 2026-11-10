@@ -1,0 +1,8 @@
+# Visual Studio가 한글이 든 소스를 CP949로 다시 저장하지 않도록 UTF-8로 고정합니다.
+# (프로젝트는 /utf-8로 빌드하므로 다른 인코딩으로 저장되면 한글 문자열이 깨집니다.)
+root = true
+
+[*.{cpp,h}]
+charset = utf-8
+indent_style = space
+indent_size = 4
